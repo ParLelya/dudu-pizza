@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import { setSort } from '../slices/filterSlice';
 import { RootState } from '../store/store';
@@ -17,9 +17,12 @@ const Sorting: React.FC = () => {
 
 	const dispatch = useDispatch()
 	const sort = useSelector((state: RootState) => state.filter.sortType)
+	const sortRef = useRef<HTMLDivElement | null>(null)
+
 	const setSortType = (obj: ISortType) => {
 		dispatch(setSort(obj))
 	}
+
 	const [open, setOpen] = useState(false)
 
 	const onSortListItemClick = (obj: ISortType) => {
@@ -27,8 +30,18 @@ const Sorting: React.FC = () => {
 		setOpen(false)
 	}
 
+	useEffect(() => {
+		const handleClick = (event: MouseEvent) => {
+			if (event.composedPath().join(',').includes(String(sortRef.current))) {
+				setOpen(false)
+			}
+		}
+		document.body.addEventListener('click', handleClick)
+		return () => document.body.removeEventListener('click', handleClick)
+	}, [])
+
 	return (
-		<div className="sort">
+		<div ref={sortRef} className="sort">
 			<div className="sort__label">
 				<svg
 					width="10"

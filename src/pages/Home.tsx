@@ -44,9 +44,9 @@ const Home: React.FC<ISearchProps> = () => {
 			const params = qs.parse(window.location.search.substring(1))
 			
 			const sortType = sortArray.find(obj => obj.sort === params.sortType)
-			dispatch(
-				setFilters({...params, sortType})
-			)
+			// dispatch(
+			// 	setFilters({...params, sortType})
+			// )
 			isSearching.current = true
 		}
 	}, [])
