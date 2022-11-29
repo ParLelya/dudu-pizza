@@ -24,7 +24,7 @@ const App: React.FC = () => {
 				<div className="content">
 					<div className="container">
 						<Routes>
-							<Route path='/home' element={<Home searchValue={searchValue} setSearchValue={setSearchValue}/>} />
+							<Route path='/' element={<Home searchValue={searchValue} setSearchValue={setSearchValue}/>} />
 							<Route path='/cart' element={<Cart />} />
 							<Route path="/*" element={<NotFound />} />
 						</Routes>

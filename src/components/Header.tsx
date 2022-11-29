@@ -2,12 +2,17 @@ import React from 'react';
 import { Link } from "react-router-dom";
 import Search from './Search';
 import { ISearchProps } from '../types/data';
+import { useAppSelector } from '../store/hooks';
+import { RootState } from '../store/store';
 
 const Header: React.FC<ISearchProps> = ({searchValue, setSearchValue}) => {
+
+	const {totalPrice, products} = useAppSelector((state: RootState) => state.cart)
+
 	return (
 		<div className="header">
 			<div className="container">
-				<Link to='/home'>
+				<Link to='/'>
 					<div className="header__logo">
 						<img
 							width="50"
@@ -26,7 +31,7 @@ const Header: React.FC<ISearchProps> = ({searchValue, setSearchValue}) => {
 				<Search searchValue={searchValue} setSearchValue={setSearchValue}/>
 				<div className="header__cart">
 					<Link to='/cart' className="button button--cart">
-						<span>770 ₽</span>
+						<span>{totalPrice} ₽</span>
 						<div className="button__delimiter"></div>
 						<svg
 							width="18"
@@ -57,7 +62,7 @@ const Header: React.FC<ISearchProps> = ({searchValue, setSearchValue}) => {
 								strokeLinejoin="round"
 							/>
 						</svg>
-						<span>2</span>
+						<span>{products.length}</span>
 					</Link>
 				</div>
 			</div>

@@ -2,12 +2,12 @@ import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 
 export interface CartState {
-  price: number
+  totalPrice: number
   products: any[]
 }
 
 const initialState: CartState = {
-	price: 0,
+	totalPrice: 0,
 	products: []
 }
 

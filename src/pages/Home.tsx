@@ -2,8 +2,10 @@ import React, { useState, useEffect, useRef } from 'react'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import qs from 'qs';
-import { useSelector, useDispatch } from 'react-redux';
-import { setCategory, setPage, setFilters } from '../slices/filterSlice';
+
+import { useAppDispatch, useAppSelector } from '../store/hooks';
+import type { RootState } from '../store/store';
+import { setCategory, setPage, /*setFilters*/ } from '../slices/filterSlice';
 
 import Categories from '../components/Categories';
 import Sorting from '../components/Sorting';
@@ -11,15 +13,15 @@ import Card from '../components/Card';
 import MyLoader from '../components/MyLoader';
 import Pagination from '../components/Pagination';
 
-import type { RootState } from '../store/store';
 import { Pizza, ISearchProps } from '../types/data';
 import { SearchContext } from '../App'
-import { sortArray } from './../components/Sorting';
+// import { sortArray } from './../components/Sorting';
+
 
 const Home: React.FC<ISearchProps> = () => {
 
 	const { searchValue } = React.useContext(SearchContext)
-	const dispatch = useDispatch()
+	const dispatch = useAppDispatch()
 	const navigate = useNavigate()
 	const isSearching = useRef(false)
 
@@ -29,7 +31,7 @@ const Home: React.FC<ISearchProps> = () => {
 	// const [category, setCategory] = useState(0)
 	// const [sortType, setSortType] = useState({ name: 'по убыванию популярности', sort: 'rating' })
 
-	const { category, sortType, currentPage } = useSelector((state: RootState) => state.filter)
+	const { category, sortType, currentPage } = useAppSelector((state: RootState) => state.filter)
 
 	const setCategoryType = (id: number) => {
 		dispatch(setCategory(id))
@@ -39,17 +41,17 @@ const Home: React.FC<ISearchProps> = () => {
 
 	const onPageChange = (page: number) => dispatch(setPage(page))
 
-	useEffect(() => {
-		if (window.location.search) {
-			const params = qs.parse(window.location.search.substring(1))
+	// useEffect(() => {
+	// 	if (window.location.search) {
+	// 		const params = qs.parse(window.location.search.substring(1))
 			
-			const sortType = sortArray.find(obj => obj.sort === params.sortType)
-			// dispatch(
-			// 	setFilters({...params, sortType})
-			// )
-			isSearching.current = true
-		}
-	}, [])
+	// 		const sortType = sortArray.find(obj => obj.sort === params.sortType)
+	// 		dispatch(
+	// 			setFilters({...params, sortType})
+	// 		)
+	// 		isSearching.current = true
+	// 	}
+	// }, [])
 
 	useEffect(() => {
 		setIsLoading(true)
@@ -90,8 +92,8 @@ const Home: React.FC<ISearchProps> = () => {
 			category: category,
 			page: currentPage
 		})
-
 		navigate(`?${queryString}`)
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [category, sortType.sort, currentPage])
 
 	const pizzas: JSX.Element[] = items.map((obj: Pizza) => <Card {...obj} key={obj.id} />)

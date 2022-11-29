@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { useSelector, useDispatch } from 'react-redux';
+import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { setSort } from '../slices/filterSlice';
 import { RootState } from '../store/store';
 import { ISortType } from '../types/data'
@@ -15,8 +15,8 @@ export const sortArray: Array<ISortType> = [
 
 const Sorting: React.FC = () => {
 
-	const dispatch = useDispatch()
-	const sort = useSelector((state: RootState) => state.filter.sortType)
+	const dispatch = useAppDispatch()
+	const sort = useAppSelector((state: RootState) => state.filter.sortType)
 	const sortRef = useRef<HTMLDivElement | null>(null)
 
 	const setSortType = (obj: ISortType) => {

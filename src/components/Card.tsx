@@ -1,16 +1,31 @@
 import React, { useState } from 'react'
 import { Pizza } from '../types/data'
+import { useAppSelector, useAppDispatch } from '../store/hooks'
+import { addProduct } from '../slices/cartSlice'
+import { RootState } from '../store/store'
 
 const Card: React.FC<Pizza> = (props) => {
-	const { title, price, sizes, imageUrl, types } = props
+
+	const dispatch = useAppDispatch()
+	const { products } = useAppSelector((state: RootState) => state.cart)
+	const { id, title, price, imageUrl, sizes, types } = props
+
 	const doughType = ["тонкое", "пышное"]
 	const [dough, setDough] = useState(0)
 	const [diameter, setDiameter] = useState(0)
 
-	// const [count, setCount] = useState(0)
-	// const handleClick = () => {
-	// 	setCount(prev => prev + 1)
-	// }
+
+	const addClick = () => {
+		const item = {
+			id,
+			title,
+			price,
+			imageUrl,
+			type: activeType,
+			size: activeSize,
+		}
+		dispatch(addProduct(item))
+	}
 
 	return (
 		<div className="pizza-block">
@@ -49,6 +64,7 @@ const Card: React.FC<Pizza> = (props) => {
 			<div className="pizza-block__bottom">
 				<div className="pizza-block__price">от {price} ₽</div>
 				<button
+					onClick={addClick}
 					className="button button--outline button--add"
 				>
 					<svg
@@ -64,7 +80,7 @@ const Card: React.FC<Pizza> = (props) => {
 						/>
 					</svg>
 					<span>Добавить</span>
-					<i>0</i>
+					<i>{products.length}</i>
 				</button>
 			</div>
 		</div>)
