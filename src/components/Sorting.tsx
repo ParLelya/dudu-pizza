@@ -4,10 +4,14 @@ import { setSort } from '../slices/filterSlice';
 import { RootState } from '../store/store';
 import { ISortType } from '../types/data'
 
-// interface ISort {
-// 	sortType: ISortType
-// 	setSortType: (id: ISortType) => void
-// }
+export const sortArray: Array<ISortType> = [
+	{ name: 'по возрастанию популярности', sort: '-rating' },
+	{ name: 'по убыванию популярности', sort: 'rating' },
+	{ name: "сначала дешевле", sort: '-price' },
+	{ name: "сначала дороже", sort: 'price' },
+	{ name: "по алфавиту А-Я", sort: '-title' },
+	{ name: "по алфавиту Я-А", sort: 'title' }
+]
 
 const Sorting: React.FC = () => {
 
@@ -17,15 +21,6 @@ const Sorting: React.FC = () => {
 		dispatch(setSort(obj))
 	}
 	const [open, setOpen] = useState(false)
-
-	const sortArray: Array<ISortType> = [
-		{ name: 'по возрастанию популярности', sort: '-rating' },
-		{ name: 'по убыванию популярности', sort: 'rating' },
-		{ name: "сначала дешевле", sort: '-price' },
-		{ name: "сначала дороже", sort: 'price' },
-		{ name: "по алфавиту А-Я", sort: '-title' },
-		{ name: "по алфавиту Я-А", sort: 'title' }
-	]
 
 	const onSortListItemClick = (obj: ISortType) => {
 		setSortType(obj)
