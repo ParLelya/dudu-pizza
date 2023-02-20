@@ -256,6 +256,7 @@ a {
   cursor: pointer;
 }
 .sort__popup {
+  position: absolute;
   right: 0;
   margin-top: 15px;
   background: #ffffff;
