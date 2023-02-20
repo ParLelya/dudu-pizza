@@ -4,6 +4,7 @@ import Header from './components/Header';
 import Categories from './components/Categories';
 import Sorting from './components/Sorting';
 import Card from './components/Card';
+import pizzas from "./pizzas.json"
 
 const App: React.FC = () => {
 	return (
@@ -17,7 +18,11 @@ const App: React.FC = () => {
 					</div>
 					<h2 className="content__title">Все пиццы</h2>
 					<div className="content__items">
-						<Card />
+						{
+							pizzas.map((obj) => {
+								return <Card {...obj}/>
+							})
+						}
 					</div>
 				</div>
 			</div>
