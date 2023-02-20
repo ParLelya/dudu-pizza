@@ -2,6 +2,7 @@
 
 .sort {
   position: relative;
+
   &__label {
     display: flex;
     align-items: center;
@@ -15,14 +16,14 @@
     }
 
     span {
-      color: $orange;
-      border-bottom: 1px dashed $orange;
+      color: $purple;
+      border-bottom: 1px dashed $purple;
       cursor: pointer;
     }
   }
 
   &__popup {
-    position: absolute;
+    // position: absolute;
     right: 0;
     margin-top: 15px;
     background: #ffffff;
@@ -45,7 +46,7 @@
 
         &.active {
           font-weight: bold;
-          color: $orange;
+          color: $purple;
         }
       }
     }

@@ -7,6 +7,7 @@ import Card from './components/Card';
 import pizzas from "./pizzas.json"
 
 const App: React.FC = () => {
+	
 	return (
 		<div className="wrapper">
 			<Header />
@@ -20,7 +21,7 @@ const App: React.FC = () => {
 					<div className="content__items">
 						{
 							pizzas.map((obj) => {
-								return <Card {...obj}/>
+								return <Card {...obj} key={obj.id}/>
 							})
 						}
 					</div>

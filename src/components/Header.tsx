@@ -5,7 +5,12 @@ const Header: React.FC = () => {
 		<div className="header">
 			<div className="container">
 				<div className="header__logo">
-					<img width="38" src="./img/pizza-logo.svg" alt="Pizza logo" />
+					<img 
+					width="50" 
+					height="50"
+					src="img/logo.png" 
+					alt="Pizza logo" 
+					/>
 					<div>
 						<h1>Dudu Pizza</h1>
 						<p>Жареных гвоздей не хочешь?</p>

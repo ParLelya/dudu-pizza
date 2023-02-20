@@ -10,7 +10,7 @@ interface ICardProps {
 }
 
 const Card: React.FC<ICardProps> = (props) => {
-	const { id, title, price, sizes, imageUrl, types } = props
+	const { title, price, sizes, imageUrl, types } = props
 	const doughType = ["тонкое", "пышное"]
 	const [dough, setDough] = useState(0)
 	const [diameter, setDiameter] = useState(0)
@@ -33,7 +33,7 @@ const Card: React.FC<ICardProps> = (props) => {
 					{
 						types.map((type, index) => {
 							return <li
-								key={id}
+								key={index}
 								onClick={() => setDough(index)}
 								className={dough === index ? 'active' : ''}
 							>{doughType[type]}</li>
@@ -45,7 +45,7 @@ const Card: React.FC<ICardProps> = (props) => {
 						sizes.map((size, index) => {
 							return (
 								<li
-									key={id}
+									key={size}
 									onClick={() => setDiameter(index)}
 									className={diameter === index ? 'active' : ''}
 								>{size} см</li>

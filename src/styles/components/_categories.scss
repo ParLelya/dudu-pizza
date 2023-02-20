@@ -4,6 +4,10 @@
   ul {
     display: flex;
 
+    @media screen and (max-width: 1024px) {
+      flex-direction: column;
+    }
+
     li {
       background-color: #f9f9f9;
       padding: 13px 30px;

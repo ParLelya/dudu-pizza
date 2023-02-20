@@ -2,12 +2,16 @@
 
 .header {
   border-bottom: 1px solid $gray-line;
-  padding: 40px 0;
+  padding: 30px 0;
 
   .container {
     display: flex;
     align-items: center;
     justify-content: space-between;
+
+	@media screen and (max-width: 1024px) {
+		flex-direction: column;
+	  }
   }
 
   &__logo {
@@ -15,6 +19,9 @@
 
     img {
       margin-right: 15px;
+	  border-radius: 50%;
+	  border: 5px solid #7B59CE;
+	  transform: translateY(-15%);
     }
 
     h1 {
@@ -27,6 +34,9 @@
 
     p {
       color: #7b7b7b;
+	  @media screen and (max-width: 1024px) {
+		margin-bottom: 20px;
+	  }
     }
   }
 }
