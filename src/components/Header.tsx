@@ -1,24 +1,29 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 
 const Header: React.FC = () => {
 	return (
 		<div className="header">
 			<div className="container">
-				<div className="header__logo">
-					<img 
-					width="50" 
-					height="50"
-					src="img/logo.png" 
-					alt="Pizza logo" 
-					/>
-					<div>
-						<h1>Dudu Pizza</h1>
-						<p>Жареных гвоздей не хочешь?</p>
+				<Link to='/home'>
+					<div className="header__logo">
+						<img
+							width="50"
+							height="50"
+							src="img/logo.png"
+							alt="Pizza logo"
+						/>
+
+						<div>
+							<h1>Dudu Pizza</h1>
+							<p>Жареных гвоздей не хочешь?</p>
+						</div>
+
 					</div>
-				</div>
+				</Link>
 				<div className="header__cart">
-					<a href="/cart.html" className="button button--cart">
-						<span>520 ₽</span>
+					<Link to='/cart' className="button button--cart">
+						<span>770 ₽</span>
 						<div className="button__delimiter"></div>
 						<svg
 							width="18"
@@ -49,11 +54,11 @@ const Header: React.FC = () => {
 								strokeLinejoin="round"
 							/>
 						</svg>
-						<span>3</span>
-					</a>
+						<span>2</span>
+					</Link>
 				</div>
 			</div>
-		</div>
+		</div >
 	)
 }
 
