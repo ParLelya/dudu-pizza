@@ -1,8 +1,12 @@
-import React, { useState } from 'react'
+import React from 'react'
 
-const Categories: React.FC = () => {
+interface ICategory {
+	categoryType: number
+	setCategoryType: React.Dispatch<React.SetStateAction<number>>
+}
 
-	const [active, setActive] = useState(0)
+const Categories: React.FC<ICategory> = ({ categoryType, setCategoryType }) => {
+
 	const categories: Array<string> = ['Все', 'Мясные', 'Вегетарианские', 'Гриль', 'Острые',]
 
 	return (
@@ -11,8 +15,8 @@ const Categories: React.FC = () => {
 				{categories.map((value, index) => {
 					return <li
 						key={index}
-						onClick={() => setActive(index)}
-						className={active === index ? 'active' : ''}
+						onClick={() => setCategoryType(index)}
+						className={categoryType === index ? 'active' : ''}
 					>{value}</li>
 				})}
 			</ul>

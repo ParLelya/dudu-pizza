@@ -1,0 +1,31 @@
+@import "../variables";
+
+.header {
+  &__search {
+    position: relative;
+
+    @media screen and (max-width: 1024px) {
+      margin: 1rem 0;
+    }
+
+    svg {
+      width: 20px;
+      height: 20px;
+      transform: translateY(40%) translateX(35%);
+      opacity: 0.4;
+      position: absolute;
+    }
+
+    input {
+      border: 2px solid $gray-line;
+      border-radius: 15px;
+      padding: 8px 30px;
+      outline: none;
+      width: 15rem;
+
+      &:focus {
+        border: 2px solid #afafaf;
+      }
+    }
+  }
+}

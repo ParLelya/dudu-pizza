@@ -225,7 +225,7 @@ body {
   }
 
   &__bottom {
-    margin: 50px 0;
+    margin-top: 2rem;
 
     &-details {
       display: flex;
@@ -253,7 +253,7 @@ body {
     &-buttons {
       display: flex;
       justify-content: space-between;
-      margin: 2rem 0;
+      margin-top: 2rem;
 
       .go-back-btn {
         display: flex;
