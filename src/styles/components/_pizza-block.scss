@@ -3,11 +3,16 @@
 .pizza-block {
   width: 280px;
   text-align: center;
-  margin-bottom: 65px;
+  margin: 0 1rem 2rem;
 
-  &:not(:nth-of-type(4n)) {
-    margin-right: 35px;
+  @media screen and (max-width: 768px) {
+	width: 37vw;
+	margin: 0 0.5rem 1rem;
   }
+
+//   &:not(:nth-of-type(4n)) {
+//     margin-right: 35px;
+//   }
 
   &__image {
     width: 260px;

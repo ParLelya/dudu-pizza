@@ -1,0 +1,49 @@
+@import "../variables";
+
+.container {
+  .paginate {
+    margin: 3rem 0 1rem;
+    padding: 0 5rem;
+    display: flex;
+    justify-content: center;
+    list-style-type: none;
+    font-size: 1rem;
+    font-weight: 800;
+
+    li a {
+      border-radius: 50%;
+      padding: 0.5rem 0.9rem;
+      margin: 0 0.5rem;
+      border: 1px solid $gray-line;
+	  color: $dark-gray;
+      cursor: pointer;
+
+      &:hover {
+        border: 1px solid $dark-gray;
+		color: $black;
+      }
+    }
+
+    li.previous a,
+    li.next a,
+    li.break a {
+      border-color: transparent;
+    }
+
+    li.selected a {
+      background-color: $purple;
+      border-color: transparent;
+      color: white;
+      min-width: 32px;
+    }
+
+    li.disabled a {
+      color: $gray-line;
+    }
+
+    li.disable,
+    li.disabled a {
+      cursor: default;
+    }
+  }
+}
