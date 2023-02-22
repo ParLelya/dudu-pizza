@@ -4,44 +4,55 @@ import Categories from '../components/Categories';
 import Sorting from '../components/Sorting';
 import Card from '../components/Card';
 import MyLoader from '../components/MyLoader';
-import { ISearchProps } from '../types/interface';
+import { Pizza, ISearchProps } from '../types/data';
 import Pagination from '../components/Pagination';
 
 const Home: React.FC<ISearchProps> = ({ searchValue }) => {
 
 	const [items, setItems] = useState([])
 	const [category, setCategory] = useState(0)
-	const [sortType, setSortType] = useState({ name: 'популярности', sort: 'rating' })
+	const [sortType, setSortType] = useState({ name: 'по убыванию популярности', sort: 'rating' })
 	const [isLoading, setIsLoading] = useState(true)
+	const [currentPage, setCurrentPage] = useState(1)
+
+	const onPageChange = (page: number) => setCurrentPage(page)
 
 	useEffect(() => {
 		setIsLoading(true)
 
-		const currentCategory = category > 0 ? `category=${category}` : ''
+		const currentCategory = category > 0 ? `&category=${category}` : ''
 		const sortBy = sortType.sort.replace('-', '')
 		const order = sortType.sort.includes('-') ? 'asc' : 'desc'
 		const search = searchValue ? `&search=${searchValue}` : ''
+		const page = currentPage
 
-		fetch(
-			`https://63f38bd1de3a0b242b445773.mockapi.io/items?${currentCategory}${search}&sortBy=${sortBy}&order=${order}`
-		)
-			.then((response) => { response.json() })
-			.then((data: any) => {
-				setTimeout(() => {
-					setItems(data)
-					setIsLoading(false)
-				}, 5000)
-			})
-		window.scrollTo(0, 0)
-	}, [category, sortType, searchValue])
+		// fetch(
+		// 	`https://63f38bd1de3a0b242b445773.mockapi.io/items?
+		// page=${page}
+		// &limit=4
+		// ${currentCategory}
+		// ${search}
+		// &sortBy=${sortBy}
+		// &order=${order}`
+		// )
+		// 	.then((response) => { response.json() })
+		// 	.then((data: Pizza[]) => {
+		// 		setTimeout(() => {
+		// 			setItems(data)
+		// 			setIsLoading(false)
+		// 		}, 5000)
+		// 	})
+
+		window.scrollTo(0, 290)
+	}, [category, sortType, searchValue, currentPage])
 
 	const pizzas = items
 		// .filter(obj => {
 		// 	return obj.title.toLowerCase().includes(searchValue.toLowerCase())
 		// })
-		.map((obj: any) => <Card {...obj} key={obj.id} />)
+		.map((obj: Pizza) => <Card {...obj} key={obj.id} />)
 
-	const skeleton = [...new Array(4)].map((_, index) => <MyLoader key={index} />)
+	const skeleton = [...new Array(3)].map((_, index) => <MyLoader key={index} />)
 
 	return (
 		<>
@@ -57,7 +68,7 @@ const Home: React.FC<ISearchProps> = ({ searchValue }) => {
 						: pizzas
 				}
 			</div>
-			<Pagination/>
+			<Pagination onPageChange={(number) => onPageChange(number)} />
 		</>)
 }
 

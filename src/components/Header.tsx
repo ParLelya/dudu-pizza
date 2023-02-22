@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 import Search from './Search';
-import { ISearchProps } from '../types/interface';
+import { ISearchProps } from '../types/data';
 
-const Header: React.FC<ISearchProps> = ({searchValue, setSearchValue}) => {
+const Header: React.FC<ISearchProps> = ({ searchValue, setSearchValue }) => {
 	return (
 		<div className="header">
 			<div className="container">

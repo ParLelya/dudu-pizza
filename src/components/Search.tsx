@@ -1,5 +1,5 @@
 import React from 'react'
-import { ISearchProps } from '../types/interface'
+import { ISearchProps } from '../types/data'
 
 const Search: React.FC<ISearchProps> = ({ searchValue, setSearchValue }) => {
 	return (

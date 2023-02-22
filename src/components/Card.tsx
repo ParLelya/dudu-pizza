@@ -1,15 +1,7 @@
 import React, { useState } from 'react'
+import { Pizza } from '../types/data'
 
-interface ICardProps {
-	id: number
-	title: string
-	price: number
-	sizes: number[]
-	imageUrl: string
-	types: number[]
-}
-
-const Card: React.FC<ICardProps> = (props) => {
+const Card: React.FC<Pizza> = (props) => {
 	const { title, price, sizes, imageUrl, types } = props
 	const doughType = ["тонкое", "пышное"]
 	const [dough, setDough] = useState(0)
