@@ -4,8 +4,10 @@ import Categories from '../components/Categories';
 import Sorting from '../components/Sorting';
 import Card from '../components/Card';
 import MyLoader from '../components/MyLoader';
+import { ISearchProps } from '../types/interface';
+import Pagination from '../components/Pagination';
 
-const Home: React.FC = () => {
+const Home: React.FC<ISearchProps> = ({ searchValue }) => {
 
 	const [items, setItems] = useState([])
 	const [category, setCategory] = useState(0)
@@ -18,19 +20,28 @@ const Home: React.FC = () => {
 		const currentCategory = category > 0 ? `category=${category}` : ''
 		const sortBy = sortType.sort.replace('-', '')
 		const order = sortType.sort.includes('-') ? 'asc' : 'desc'
+		const search = searchValue ? `&search=${searchValue}` : ''
 
 		fetch(
-			`https://63f38bd1de3a0b242b445773.mockapi.io/items?${currentCategory}&sortBy=${sortBy}&order=${order}`
+			`https://63f38bd1de3a0b242b445773.mockapi.io/items?${currentCategory}${search}&sortBy=${sortBy}&order=${order}`
 		)
 			.then((response) => { response.json() })
-			.then((data) => {
+			.then((data: any) => {
 				setTimeout(() => {
 					setItems(data)
 					setIsLoading(false)
 				}, 5000)
 			})
 		window.scrollTo(0, 0)
-	}, [category, sortType])
+	}, [category, sortType, searchValue])
+
+	const pizzas = items
+		// .filter(obj => {
+		// 	return obj.title.toLowerCase().includes(searchValue.toLowerCase())
+		// })
+		.map((obj: any) => <Card {...obj} key={obj.id} />)
+
+	const skeleton = [...new Array(4)].map((_, index) => <MyLoader key={index} />)
 
 	return (
 		<>
@@ -42,10 +53,11 @@ const Home: React.FC = () => {
 			<div className="content__items">
 				{
 					isLoading
-						? [...new Array(6)].map((_, index) => <MyLoader key={index} />)
-						: (items.map((obj: any) => <Card {...obj} key={obj.id} />))
+						? skeleton
+						: pizzas
 				}
 			</div>
+			<Pagination/>
 		</>)
 }
 

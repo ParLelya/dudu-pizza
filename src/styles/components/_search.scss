@@ -16,6 +16,19 @@
       position: absolute;
     }
 
+	.search--close {
+		cursor: pointer;
+		width: 20px;
+		height: 20px;
+		transform: translateY(40%) translateX(-120%);
+		opacity: 0.4;
+		position: absolute;
+
+		&:hover {
+			opacity: 0.8;
+		}
+	  }
+
     input {
       border: 2px solid $gray-line;
       border-radius: 15px;
@@ -24,7 +37,7 @@
       width: 15rem;
 
       &:focus {
-        border: 2px solid #afafaf;
+        border: 2px solid #666666;
       }
     }
   }
