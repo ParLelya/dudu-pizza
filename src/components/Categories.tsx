@@ -7,7 +7,7 @@ interface ICategory {
 
 const Categories: React.FC<ICategory> = ({ categoryType, setCategoryType }) => {
 
-	const categories: Array<string> = ['Все', 'Мясные', 'Вегетарианские', 'Острые',]
+	const categories: Array<string> = ['Все', 'Мясные', 'Вегетарианские', 'Острые']
 
 	return (
 		<div className="categories">
