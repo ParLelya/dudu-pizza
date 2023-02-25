@@ -7,7 +7,7 @@ import NotFound from './pages/NotFound';
 import Cart from './pages/Cart';
 import { ISearchProps } from './types/data';
 
-export const SearchContext = createContext<ISearchProps>()
+export const SearchContext = createContext<ISearchProps>('')
 
 const App: React.FC = () => {
 
