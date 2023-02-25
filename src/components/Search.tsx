@@ -1,7 +1,10 @@
 import React from 'react'
-import { ISearchProps } from '../types/data'
+import { SearchContext } from '../App'
 
-const Search: React.FC<ISearchProps> = ({ searchValue, setSearchValue }) => {
+const Search: React.FC = () => {
+
+	const {searchValue, setSearchValue} = React.useContext(SearchContext)
+
 	return (
 		<div className='header__search'>
 			<svg

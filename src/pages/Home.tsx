@@ -6,9 +6,10 @@ import Card from '../components/Card';
 import MyLoader from '../components/MyLoader';
 import { Pizza, ISearchProps } from '../types/data';
 import Pagination from '../components/Pagination';
+import { SearchContext } from '../App'
 
-const Home: React.FC<ISearchProps> = ({ searchValue }) => {
-
+const Home: React.FC<ISearchProps> = () => {
+	const {searchValue} = React.useContext(SearchContext)
 	const [items, setItems] = useState([])
 	const [category, setCategory] = useState(0)
 	const [sortType, setSortType] = useState({ name: 'по убыванию популярности', sort: 'rating' })
@@ -52,7 +53,7 @@ const Home: React.FC<ISearchProps> = ({ searchValue }) => {
 		// })
 		.map((obj: Pizza) => <Card {...obj} key={obj.id} />)
 
-	const skeleton = [...new Array(3)].map((_, index) => <MyLoader key={index} />)
+	const skeleton = [...new Array(4)].map((_, index) => <MyLoader key={index} />)
 
 	return (
 		<>

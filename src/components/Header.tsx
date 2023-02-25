@@ -1,9 +1,8 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 import Search from './Search';
-import { ISearchProps } from '../types/data';
 
-const Header: React.FC<ISearchProps> = ({ searchValue, setSearchValue }) => {
+const Header: React.FC = () => {
 	return (
 		<div className="header">
 			<div className="container">
@@ -23,10 +22,7 @@ const Header: React.FC<ISearchProps> = ({ searchValue, setSearchValue }) => {
 
 					</div>
 				</Link>
-				<Search
-					searchValue={searchValue}
-					setSearchValue={setSearchValue}
-				/>
+				<Search/>
 				<div className="header__cart">
 					<Link to='/cart' className="button button--cart">
 						<span>770 ₽</span>
