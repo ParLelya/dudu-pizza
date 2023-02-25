@@ -9,8 +9,11 @@ import Pagination from '../components/Pagination';
 import { SearchContext } from '../App'
 
 const Home: React.FC<ISearchProps> = () => {
-	const {searchValue} = React.useContext(SearchContext)
-	const [items, setItems] = useState([])
+	const { searchValue } = React.useContext(SearchContext)
+
+	const defaultItems: Pizza[] = []
+	const [items, setItems]: [Pizza[], (items: Pizza[]) => void] = useState(defaultItems)
+
 	const [category, setCategory] = useState(0)
 	const [sortType, setSortType] = useState({ name: 'по убыванию популярности', sort: 'rating' })
 	const [isLoading, setIsLoading] = useState(true)
@@ -27,27 +30,31 @@ const Home: React.FC<ISearchProps> = () => {
 		const search = searchValue ? `&search=${searchValue}` : ''
 		const page = currentPage
 
-		// fetch(
-		// 	`https://63f38bd1de3a0b242b445773.mockapi.io/items?
-		// page=${page}
-		// &limit=4
-		// ${currentCategory}
-		// ${search}
-		// &sortBy=${sortBy}
-		// &order=${order}`
-		// )
-		// 	.then((response) => { response.json() })
-		// 	.then((data: Pizza[]) => {
-		// 		setTimeout(() => {
-		// 			setItems(data)
-		// 			setIsLoading(false)
-		// 		}, 5000)
-		// 	})
+		axios.get<Pizza[]>(
+			`https://63f38bd1de3a0b242b445773.mockapi.io/items?
+		page=${page}
+		&limit=4
+		${currentCategory}
+		${search}
+		&sortBy=${sortBy}
+		&order=${order}`, {
+			headers: {
+				"Content-Type": "application/json"
+			},
+		}
+		)
+			.then((response) => // { response.json() })
+				// .then((value) => {
+				setTimeout(() => {
+					setItems(response.data)
+					setIsLoading(false)
+				}, 1000)
+			)
 
 		window.scrollTo(0, 290)
 	}, [category, sortType, searchValue, currentPage])
 
-	const pizzas = items
+	const pizzas: JSX.Element[] = items
 		// .filter(obj => {
 		// 	return obj.title.toLowerCase().includes(searchValue.toLowerCase())
 		// })
