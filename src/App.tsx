@@ -16,6 +16,7 @@ import './styles/app.scss';
 // export const SearchContext = createContext<ISearchProps>('')
 
 const App: React.FC = () => {
+	
 	const dispatch = useDispatch()
 	const searchValue = useSelector((state: RootState) => state.filter.searchValue)
 	const setSearch = (value: string) => {
