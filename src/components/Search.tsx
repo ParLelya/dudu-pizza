@@ -1,9 +1,10 @@
 import React from 'react'
-import { SearchContext } from '../App'
+import { ISearchProps } from '../types/data'
+// import { SearchContext } from '../App'
 
-const Search: React.FC = () => {
+const Search: React.FC<ISearchProps> = ({searchValue, setSearchValue}) => {
 
-	const {searchValue, setSearchValue} = React.useContext(SearchContext)
+	// const { searchValue, setSearchValue } = React.useContext(SearchContext)
 
 	return (
 		<div className='header__search'>
@@ -17,7 +18,7 @@ const Search: React.FC = () => {
 			<input
 				value={searchValue}
 				placeholder="Найти питсу"
-				onChange={(event) => setSearchValue!(event.target.value)}
+				onChange={(event) => setSearchValue(event.target.value)}
 			/>
 			{searchValue && (
 				<svg

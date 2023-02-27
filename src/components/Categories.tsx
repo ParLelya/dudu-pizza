@@ -2,7 +2,7 @@ import React from 'react'
 
 interface ICategory {
 	categoryType: number
-	setCategoryType: React.Dispatch<React.SetStateAction<number>>
+	setCategoryType: (id: number) => void
 }
 
 const Categories: React.FC<ICategory> = ({ categoryType, setCategoryType }) => {

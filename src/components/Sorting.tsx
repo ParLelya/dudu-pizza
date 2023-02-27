@@ -1,19 +1,15 @@
 import React, { useState } from 'react'
-
-interface IFilter {
-	name: string
-	sort: string
-}
+import { ISortType } from '../types/data'
 
 interface ISort {
-	sortType: IFilter
-	setSortType: React.Dispatch<React.SetStateAction<IFilter>>
+	sortType: ISortType
+	setSortType: (id: ISortType) => void
 }
 
 const Sorting: React.FC<ISort> = ({ sortType, setSortType }) => {
 	const [open, setOpen] = useState(false)
 
-	const filter: Array<IFilter> = [
+	const sortArray: Array<ISortType> = [
 		{ name: 'по возрастанию популярности', sort: '-rating' },
 		{ name: 'по убыванию популярности', sort: 'rating' },
 		{ name: "сначала дешевле", sort: '-price' },
@@ -22,8 +18,8 @@ const Sorting: React.FC<ISort> = ({ sortType, setSortType }) => {
 		{ name: "по алфавиту от Я до А", sort: 'title' }
 	]
 
-	const onSortListItemClick = (i: IFilter) => {
-		setSortType(i)
+	const onSortListItemClick = (id: ISortType) => {
+		setSortType(id)
 		setOpen(false)
 	}
 
@@ -48,7 +44,7 @@ const Sorting: React.FC<ISort> = ({ sortType, setSortType }) => {
 			<div className="sort__popup">
 				{open && (
 					<ul>
-						{filter.map((obj, index) => {
+						{sortArray.map((obj, index) => {
 							return (
 								<li
 									key={index}

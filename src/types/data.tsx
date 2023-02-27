@@ -11,5 +11,10 @@ export type Pizza = {
 
 export interface ISearchProps {
 	searchValue: string
-	setSearchValue?: React.Dispatch<React.SetStateAction<string>>
+	setSearchValue: (value: string) => void
+}
+
+export interface ISortType {
+	name: string
+	sort: string
 }

@@ -1,21 +1,36 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios';
+import { useSelector, useDispatch } from 'react-redux';
+import { setCategory, setSort } from '../redux/slices/filterSlice';
+
 import Categories from '../components/Categories';
 import Sorting from '../components/Sorting';
 import Card from '../components/Card';
 import MyLoader from '../components/MyLoader';
-import { Pizza, ISearchProps } from '../types/data';
 import Pagination from '../components/Pagination';
-import { SearchContext } from '../App'
 
-const Home: React.FC<ISearchProps> = () => {
-	const { searchValue } = React.useContext(SearchContext)
+import type { RootState } from '../redux/store';
+import { Pizza, ISearchProps, ISortType } from '../types/data';
+// import { SearchContext } from '../App'
+
+const Home: React.FC<ISearchProps> = ({searchValue}) => {
+	// const { searchValue } = React.useContext(SearchContext)
+	const dispatch = useDispatch()
 
 	const defaultItems: Pizza[] = []
 	const [items, setItems]: [Pizza[], (items: Pizza[]) => void] = useState(defaultItems)
 
-	const [category, setCategory] = useState(0)
-	const [sortType, setSortType] = useState({ name: 'по убыванию популярности', sort: 'rating' })
+	// const [category, setCategory] = useState(0)
+	const category = useSelector((state: RootState) => state.filter.category)
+	const setCategoryType = (id: number) => {
+		dispatch(setCategory(id))
+	}
+	// const [sortType, setSortType] = useState({ name: 'по убыванию популярности', sort: 'rating' })
+	const sortType = useSelector((state: RootState) => state.filter.sortType)
+	const setSortType = (id: ISortType) => {
+		dispatch(setSort(id))
+	}
+
 	const [isLoading, setIsLoading] = useState(true)
 	const [currentPage, setCurrentPage] = useState(1)
 
@@ -65,7 +80,7 @@ const Home: React.FC<ISearchProps> = () => {
 	return (
 		<>
 			<div className="content__top">
-				<Categories categoryType={category} setCategoryType={(id) => setCategory(id)} />
+				<Categories categoryType={category} setCategoryType={setCategoryType} />
 				<Sorting sortType={sortType} setSortType={setSortType} />
 			</div>
 			<h2 className="content__title">Все пиццы</h2>
