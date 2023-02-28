@@ -11,22 +11,24 @@ import Pagination from '../components/Pagination';
 
 import type { RootState } from '../redux/store';
 import { Pizza, ISearchProps } from '../types/data';
-// import { SearchContext } from '../App'
+import { SearchContext } from '../App'
 
-const Home: React.FC<ISearchProps> = ({searchValue}) => {
+const Home: React.FC<ISearchProps> = () => {
 
-	// const { searchValue } = React.useContext(SearchContext)
+	const { searchValue } = React.useContext(SearchContext)
 	const dispatch = useDispatch()
 
 	const defaultItems: Pizza[] = []
 	const [items, setItems]: [Pizza[], (items: Pizza[]) => void] = useState(defaultItems)
 
 	// const [category, setCategory] = useState(0)
+	// const [sortType, setSortType] = useState({ name: 'по убыванию популярности', sort: 'rating' })
+	
 	const {category, sortType} = useSelector((state: RootState) => state.filter)
 	const setCategoryType = (id: number) => {
 		dispatch(setCategory(id))
 	}
-	// const [sortType, setSortType] = useState({ name: 'по убыванию популярности', sort: 'rating' })
+	
 	
 	const [isLoading, setIsLoading] = useState(true)
 	const [currentPage, setCurrentPage] = useState(1)

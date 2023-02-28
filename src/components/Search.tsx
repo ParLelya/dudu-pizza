@@ -1,18 +1,30 @@
 import React from 'react'
+import debounce from 'lodash.debounce'
 import { ISearchProps } from '../types/data'
-// import { SearchContext } from '../App'
+import { SearchContext } from '../App'
 
-const Search: React.FC<ISearchProps> = ({ searchValue, setSearchValue }) => {
+const Search: React.FC<ISearchProps> = () => {
 
-	// const { searchValue, setSearchValue } = React.useContext(SearchContext)
-	React.useEffect(() => {
-		document.querySelector('input')
-	}, [])
-
+	const { setSearchValue } = React.useContext(SearchContext)
+	const [value, setValue] = React.useState('')
 	const inputRef = React.useRef(null)
+
 	const onClearClick = () => {
 		setSearchValue('')
-		document.querySelector('input')?.focus()
+		setValue('')
+		// inputRef.current?.focus()
+	}
+
+	const updateSearchValue = React.useCallback(
+		debounce((value: string) => {
+			setSearchValue(value)
+		}, 500),
+		[]
+	)
+
+	const onChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
+		setValue(event.target.value)
+		updateSearchValue(event.target.value)
 	}
 
 	return (
@@ -26,11 +38,11 @@ const Search: React.FC<ISearchProps> = ({ searchValue, setSearchValue }) => {
 			</svg>
 			<input
 				ref={inputRef}
-				value={searchValue}
+				value={value}
 				placeholder="Найти питсу"
-				onChange={(event) => setSearchValue(event.target.value)}
+				onChange={onChangeInput}
 			/>
-			{searchValue && (
+			{value && (
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
 					height="48"
