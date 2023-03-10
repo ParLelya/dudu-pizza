@@ -1,5 +1,4 @@
 import React from 'react';
-
 import { Route, Routes } from "react-router-dom";
 
 import Header from './components/Header';
@@ -10,19 +9,11 @@ import Cart from './pages/Cart';
 import { ISearchProps } from './types/data';
 
 import './styles/app.scss';
-// import type { RootState } from './redux/store'
-// import { useSelector, useDispatch } from 'react-redux'
-// import { setSearchValue } from './redux/slices/filterSlice';
+
 const defaultContext: ISearchProps = {searchValue: ''}
 export const SearchContext = React.createContext<ISearchProps>(defaultContext)
 
 const App: React.FC = () => {
-	
-	// const dispatch = useDispatch()
-	// const searchValue = useSelector((state: RootState) => state.filter.searchValue)
-	// const setSearch = (value: string) => {
-	// 	dispatch(setSearchValue(value))
-	// }
 	
 	const [searchValue, setSearchValue] = React.useState('')
 
