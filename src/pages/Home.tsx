@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
-import { setCategory } from '../redux/slices/filterSlice';
+import { setCategory, setPage } from '../redux/slices/filterSlice';
 
 import Categories from '../components/Categories';
 import Sorting from '../components/Sorting';
@@ -24,16 +24,16 @@ const Home: React.FC<ISearchProps> = () => {
 	// const [category, setCategory] = useState(0)
 	// const [sortType, setSortType] = useState({ name: 'по убыванию популярности', sort: 'rating' })
 	
-	const {category, sortType} = useSelector((state: RootState) => state.filter)
+	const {category, sortType, currentPage } = useSelector((state: RootState) => state.filter)
+
 	const setCategoryType = (id: number) => {
 		dispatch(setCategory(id))
 	}
 	
 	
 	const [isLoading, setIsLoading] = useState(true)
-	const [currentPage, setCurrentPage] = useState(1)
 
-	const onPageChange = (page: number) => setCurrentPage(page)
+	const onPageChange = (page: number) => dispatch(setPage(page))
 
 	useEffect(() => {
 		setIsLoading(true)
@@ -84,7 +84,7 @@ const Home: React.FC<ISearchProps> = () => {
 						: pizzas
 				}
 			</div>
-			<Pagination onPageChange={(number) => onPageChange(number)} />
+			<Pagination onPageChange={onPageChange} value={currentPage}/>
 		</>)
 }
 
