@@ -11,7 +11,7 @@ export type Pizza = {
 
 export interface ISearchProps {
 	searchValue: string
-	setSearchValue: (value: string) => void
+	setSearchValue?: (value: string) => void
 }
 
 export interface ISortType {

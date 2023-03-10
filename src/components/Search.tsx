@@ -10,14 +10,14 @@ const Search: React.FC<ISearchProps> = () => {
 	const inputRef = React.useRef(null)
 
 	const onClearClick = () => {
-		setSearchValue('')
+		setSearchValue!('')
 		setValue('')
 		// inputRef.current?.focus()
 	}
 
 	const updateSearchValue = React.useCallback(
 		debounce((value: string) => {
-			setSearchValue(value)
+			setSearchValue!(value)
 		}, 500),
 		[]
 	)

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios';
+import qs from 'qs';
 import { useSelector, useDispatch } from 'react-redux';
 import { setCategory, setPage } from '../redux/slices/filterSlice';
 
@@ -23,14 +24,13 @@ const Home: React.FC<ISearchProps> = () => {
 
 	// const [category, setCategory] = useState(0)
 	// const [sortType, setSortType] = useState({ name: 'по убыванию популярности', sort: 'rating' })
-	
-	const {category, sortType, currentPage } = useSelector((state: RootState) => state.filter)
+
+	const { category, sortType, currentPage } = useSelector((state: RootState) => state.filter)
 
 	const setCategoryType = (id: number) => {
 		dispatch(setCategory(id))
 	}
-	
-	
+
 	const [isLoading, setIsLoading] = useState(true)
 
 	const onPageChange = (page: number) => dispatch(setPage(page))
@@ -56,7 +56,7 @@ const Home: React.FC<ISearchProps> = () => {
 				"Content-Type": "application/json"
 			},
 		})
-			.then((response) => 
+			.then((response) =>
 				setTimeout(() => {
 					setItems(response.data)
 					setIsLoading(false)
@@ -65,6 +65,16 @@ const Home: React.FC<ISearchProps> = () => {
 
 		window.scrollTo(0, 290)
 	}, [category, sortType, searchValue, currentPage])
+
+	useEffect(() => {
+		const queryString = qs.stringify({
+			sort: sortType.sort,
+			category: category,
+			page: currentPage
+		})
+		console.log(queryString);
+		
+	}, [category, sortType.sort, currentPage])
 
 	const pizzas: JSX.Element[] = items.map((obj: Pizza) => <Card {...obj} key={obj.id} />)
 
@@ -84,7 +94,7 @@ const Home: React.FC<ISearchProps> = () => {
 						: pizzas
 				}
 			</div>
-			<Pagination onPageChange={onPageChange} value={currentPage}/>
+			<Pagination onPageChange={onPageChange} value={currentPage} />
 		</>)
 }
 

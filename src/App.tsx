@@ -13,8 +13,8 @@ import './styles/app.scss';
 // import type { RootState } from './redux/store'
 // import { useSelector, useDispatch } from 'react-redux'
 // import { setSearchValue } from './redux/slices/filterSlice';
-
-export const SearchContext = React.createContext<ISearchProps>('')
+const defaultContext: ISearchProps = {searchValue: ''}
+export const SearchContext = React.createContext<ISearchProps>(defaultContext)
 
 const App: React.FC = () => {
 	
