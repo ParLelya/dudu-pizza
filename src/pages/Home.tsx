@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios';
 import qs from 'qs';
 import { useSelector, useDispatch } from 'react-redux';
-import { setCategory, setPage } from '../redux/slices/filterSlice';
+import { setCategory, setPage } from '../slices/filterSlice';
 
 import Categories from '../components/Categories';
 import Sorting from '../components/Sorting';
@@ -10,7 +10,7 @@ import Card from '../components/Card';
 import MyLoader from '../components/MyLoader';
 import Pagination from '../components/Pagination';
 
-import type { RootState } from '../redux/store';
+import type { RootState } from '../store/store';
 import { Pizza, ISearchProps } from '../types/data';
 import { SearchContext } from '../App'
 

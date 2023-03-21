@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
-import { setSort } from '../redux/slices/filterSlice';
-import { RootState } from '../redux/store';
+import { setSort } from '../slices/filterSlice';
+import { RootState } from '../store/store';
 import { ISortType } from '../types/data'
 
 // interface ISort {
@@ -53,17 +53,19 @@ const Sorting: React.FC = () => {
 			<div className="sort__popup">
 				{open && (
 					<ul>
-						{sortArray.map((obj, index) => {
-							return (
-								<li
-									key={index}
-									onClick={() => onSortListItemClick(obj)}
-									className={sort.sort === obj.sort ? 'active' : ''}
-								>
-									{obj.name}
-								</li>
-							)
-						})}
+						{
+							sortArray.map((obj, index) => {
+								return (
+									<li
+										key={index}
+										onClick={() => onSortListItemClick(obj)}
+										className={sort.sort === obj.sort ? 'active' : ''}
+									>
+										{obj.name}
+									</li>
+								)
+							})
+						}
 					</ul>
 				)}
 			</div>
