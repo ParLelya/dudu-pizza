@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Pizza } from '../types/data'
+import { IProduct, Pizza } from '../types/data'
 import { useAppSelector, useAppDispatch } from '../store/hooks'
 import { addProduct } from '../slices/cartSlice'
 import { RootState } from '../store/store'
@@ -7,13 +7,13 @@ import { RootState } from '../store/store'
 const Card: React.FC<Pizza> = (props) => {
 
 	const dispatch = useAppDispatch()
-	const { products } = useAppSelector((state: RootState) => state.cart)
 	const { id, title, price, imageUrl, sizes, types } = props
-
+	const productInCart = useAppSelector((state: RootState) => state.cart.products.find((obj: IProduct) => obj.id === id))
 	const doughType = ["тонкое", "пышное"]
 	const [dough, setDough] = useState(0)
 	const [diameter, setDiameter] = useState(0)
 
+	const count = productInCart ? productInCart.count : 0
 
 	const addClick = () => {
 		const item = {
@@ -21,8 +21,8 @@ const Card: React.FC<Pizza> = (props) => {
 			title,
 			price,
 			imageUrl,
-			type: activeType,
-			size: activeSize,
+			type: doughType[dough],
+			size: diameter,
 		}
 		dispatch(addProduct(item))
 	}
@@ -80,7 +80,7 @@ const Card: React.FC<Pizza> = (props) => {
 						/>
 					</svg>
 					<span>Добавить</span>
-					<i>{products.length}</i>
+					{count > 0 && <i>{count}</i>}
 				</button>
 			</div>
 		</div>)

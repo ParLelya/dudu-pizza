@@ -5,9 +5,9 @@ import { ISearchProps } from '../types/data';
 import { useAppSelector } from '../store/hooks';
 import { RootState } from '../store/store';
 
-const Header: React.FC<ISearchProps> = ({searchValue, setSearchValue}) => {
+const Header: React.FC<ISearchProps> = ({ searchValue, setSearchValue }) => {
 
-	const {totalPrice, products} = useAppSelector((state: RootState) => state.cart)
+	const { totalPrice, totalProductsCount } = useAppSelector((state: RootState) => state.cart)
 
 	return (
 		<div className="header">
@@ -28,7 +28,7 @@ const Header: React.FC<ISearchProps> = ({searchValue, setSearchValue}) => {
 
 					</div>
 				</Link>
-				<Search searchValue={searchValue} setSearchValue={setSearchValue}/>
+				<Search searchValue={searchValue} setSearchValue={setSearchValue} />
 				<div className="header__cart">
 					<Link to='/cart' className="button button--cart">
 						<span>{totalPrice} ₽</span>
@@ -62,7 +62,7 @@ const Header: React.FC<ISearchProps> = ({searchValue, setSearchValue}) => {
 								strokeLinejoin="round"
 							/>
 						</svg>
-						<span>{products.length}</span>
+						<span>{totalProductsCount}</span>
 					</Link>
 				</div>
 			</div>
