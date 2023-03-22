@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useRef } from 'react'
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { setSort } from '../slices/filterSlice';
 import { RootState } from '../store/store';
