@@ -10,19 +10,18 @@ import Sorting from '../components/Sorting';
 import Card from '../components/Card';
 import MyLoader from '../components/MyLoader';
 import Pagination from '../components/Pagination';
-import { Pizza, ISearchProps } from '../types/data';
-import { SearchContext } from '../App'
+import { Pizza } from '../types/data';
+
 
 // import { sortArray } from './../components/Sorting';
 
-const Home: React.FC<ISearchProps> = () => {
+const Home: React.FC = () => {
 
-	const { searchValue } = React.useContext(SearchContext)
 	const dispatch = useAppDispatch()
 	const navigate = useNavigate()
 	// const isSearching = useRef(false)
 
-	const { category, sortType, currentPage } = useAppSelector((state: RootState) => state.filter)
+	const { category, sortType, currentPage, searchValue} = useAppSelector((state: RootState) => state.filter)
 	const { pizzas, isLoading } = useAppSelector((state: RootState) => state.products)
 
 	const setCategoryType = (id: number) => {

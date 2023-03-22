@@ -22,7 +22,7 @@ const Card: React.FC<Pizza> = (props) => {
 			price,
 			imageUrl,
 			type: doughType[dough],
-			size: diameter,
+			size: sizes[diameter],
 		}
 		dispatch(addProduct(item))
 	}

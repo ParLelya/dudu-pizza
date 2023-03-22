@@ -1,24 +1,23 @@
-import React from 'react'
+import React, { useRef, useCallback } from 'react'
 import debounce from 'lodash.debounce'
-import { ISearchProps } from '../types/data'
-import { SearchContext } from '../App'
+import { useAppDispatch } from '../store/hooks'
+import { setSearchValue } from '../slices/filterSlice'
 
-const Search: React.FC<ISearchProps> = () => {
-
-	const { setSearchValue } = React.useContext(SearchContext)
+const Search: React.FC = () => {
+	const dispatch = useAppDispatch()
 	const [value, setValue] = React.useState('')
-	const inputRef = React.useRef(null)
+	const inputRef = useRef<HTMLInputElement | null>(null)
 
 	const onClearClick = () => {
-		setSearchValue!('')
+		dispatch(setSearchValue(''))
 		setValue('')
-		// inputRef.current?.focus()
+		inputRef.current?.focus()
 	}
 
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	const updateSearchValue = React.useCallback(
+	const updateSearchValue = useCallback(
 		debounce((value: string) => {
-			setSearchValue!(value)
+			dispatch(setSearchValue(value))
 		}, 500),
 		[]
 	)

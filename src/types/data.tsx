@@ -19,11 +19,6 @@ export interface IProduct {
 	count: number
 }
 
-export interface ISearchProps {
-	searchValue: string
-	setSearchValue?: (value: string) => void
-}
-
 export interface ISortType {
 	name: string
 	sort: string
