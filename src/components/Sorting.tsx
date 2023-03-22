@@ -58,8 +58,8 @@ const Sorting: React.FC = () => {
 				<b>Сортировка по:</b>
 				<span onClick={() => setOpen(!open)}>{sort.name}</span>
 			</div>
-			<div className="sort__popup">
-				{open && (
+			{open && (
+				<div className="sort__popup">
 					<ul>
 						{
 							sortArray.map((obj, index) => {
@@ -75,8 +75,8 @@ const Sorting: React.FC = () => {
 							})
 						}
 					</ul>
-				)}
-			</div>
+				</div>
+			)}
 		</div>
 	)
 }
