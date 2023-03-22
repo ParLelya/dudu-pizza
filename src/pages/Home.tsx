@@ -1,50 +1,40 @@
-import React, { useState, useEffect, useRef } from 'react'
-import axios from 'axios';
+import React, { useEffect, /*useRef*/ } from 'react'
 import { useNavigate } from 'react-router-dom';
 import qs from 'qs';
-
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import type { RootState } from '../store/store';
 import { setCategory, setPage, /*setFilters*/ } from '../slices/filterSlice';
-
+import { fetchPizzas } from '../slices/productSlice';
 import Categories from '../components/Categories';
 import Sorting from '../components/Sorting';
 import Card from '../components/Card';
 import MyLoader from '../components/MyLoader';
 import Pagination from '../components/Pagination';
-
 import { Pizza, ISearchProps } from '../types/data';
 import { SearchContext } from '../App'
-// import { sortArray } from './../components/Sorting';
 
+// import { sortArray } from './../components/Sorting';
 
 const Home: React.FC<ISearchProps> = () => {
 
 	const { searchValue } = React.useContext(SearchContext)
 	const dispatch = useAppDispatch()
 	const navigate = useNavigate()
-	const isSearching = useRef(false)
-
-	const defaultItems: Pizza[] = []
-	const [items, setItems]: [Pizza[], (items: Pizza[]) => void] = useState(defaultItems)
-
-	// const [category, setCategory] = useState(0)
-	// const [sortType, setSortType] = useState({ name: 'по убыванию популярности', sort: 'rating' })
+	// const isSearching = useRef(false)
 
 	const { category, sortType, currentPage } = useAppSelector((state: RootState) => state.filter)
+	const { pizzas, isLoading } = useAppSelector((state: RootState) => state.products)
 
 	const setCategoryType = (id: number) => {
 		dispatch(setCategory(id))
 	}
-
-	const [isLoading, setIsLoading] = useState(true)
 
 	const onPageChange = (page: number) => dispatch(setPage(page))
 
 	// useEffect(() => {
 	// 	if (window.location.search) {
 	// 		const params = qs.parse(window.location.search.substring(1))
-			
+
 	// 		const sortType = sortArray.find(obj => obj.sort === params.sortType)
 	// 		dispatch(
 	// 			setFilters({...params, sortType})
@@ -53,50 +43,31 @@ const Home: React.FC<ISearchProps> = () => {
 	// 	}
 	// }, [])
 
-	useEffect(() => {
-		setIsLoading(true)
-
+	const getPizzas = async () => {
 		const currentCategory = category > 0 ? `&category=${category}` : ''
 		const sortBy = sortType.sort.replace('-', '')
 		const order = sortType.sort.includes('-') ? 'asc' : 'desc'
 		const search = searchValue ? `&search=${searchValue}` : ''
 		const page = currentPage
 		
-		if (!isSearching.current) {}
-
-		axios.get<Pizza[]>(
-			`https://63f38bd1de3a0b242b445773.mockapi.io/items?
-		page=${page}
-		&limit=4
-		${currentCategory}
-		${search}
-		&sortBy=${sortBy}
-		&order=${order}`, {
-			headers: {
-				"Content-Type": "application/json"
-			},
-		})
-			.then((response) =>
-				setTimeout(() => {
-					setItems(response.data)
-					setIsLoading(false)
-				}, 1000)
-			)
+		dispatch(fetchPizzas({currentCategory, sortBy, order, page, search}))
+		// if (!isSearching.current) {}
 
 		window.scrollTo(0, 290)
-	}, [category, sortType, searchValue, currentPage])
+	}
 
 	useEffect(() => {
+		getPizzas()
 		const queryString = qs.stringify({
 			sort: sortType.sort,
 			category: category,
 			page: currentPage
 		})
 		navigate(`?${queryString}`)
-	// eslint-disable-next-line react-hooks/exhaustive-deps
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [category, sortType.sort, currentPage])
 
-	const pizzas: JSX.Element[] = items.map((obj: Pizza) => <Card {...obj} key={obj.id} />)
+	const products: JSX.Element[] = pizzas.map((obj: Pizza) => <Card {...obj} key={obj.id} />)
 
 	const skeleton = [...new Array(4)].map((_, index) => <MyLoader key={index} />)
 
@@ -111,7 +82,7 @@ const Home: React.FC<ISearchProps> = () => {
 				{
 					isLoading
 						? skeleton
-						: pizzas
+						: products
 				}
 			</div>
 			<Pagination onPageChange={onPageChange} value={currentPage} />
