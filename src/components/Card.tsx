@@ -1,14 +1,14 @@
 import React, { useState } from 'react'
-import { IProduct, Pizza } from '../types/data'
+import { Pizza } from '../types/data'
 import { useAppSelector, useAppDispatch } from '../store/hooks'
-import { addProduct } from '../slices/cartSlice'
-import { RootState } from '../store/store'
+import { addProduct, cartItemSelector } from '../slices/cartSlice'
+
 
 const Card: React.FC<Pizza> = (props) => {
 
 	const dispatch = useAppDispatch()
 	const { id, title, price, imageUrl, sizes, types } = props
-	const productInCart = useAppSelector((state: RootState) => state.cart.products.find((obj: IProduct) => obj.id === id))
+	const productInCart = useAppSelector(cartItemSelector(id))
 	const doughType = ["тонкое", "пышное"]
 	const [dough, setDough] = useState(0)
 	const [diameter, setDiameter] = useState(0)

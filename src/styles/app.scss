@@ -124,8 +124,8 @@ body {
 
   &__item {
     display: grid;
-	align-items: center;
-	grid-template-columns: 20% 15% 20% 15% 25% 5%;
+    align-items: center;
+    grid-template-columns: 20% 15% 20% 15% 25% 5%;
     width: 100%;
     border-bottom: 1px solid $gray-line;
     padding: 1rem 0;
@@ -135,14 +135,15 @@ body {
       display: grid;
       grid-template-columns: 30% 50% 20%;
       grid-template-rows: 2 auto;
-	  justify-items: center;
-	  align-items: center;
+      justify-items: center;
+      align-items: center;
       grid-row-gap: 1rem;
       font-size: 0.5rem;
     }
 
     &-img {
-      margin-right: 2rem;
+      margin: 0 2rem;
+      justify-self: center;
 
       img {
         width: 80px;

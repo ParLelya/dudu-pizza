@@ -1,15 +1,14 @@
 import React from 'react'
 import { Link } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from '../store/hooks';
-import { RootState } from '../store/store';
 import { IProduct } from '../types/data';
 import ProductInCart from '../components/ProductInCart';
-import { clearProducts } from '../slices/cartSlice';
+import { cartSelector, clearProducts } from '../slices/cartSlice';
 
 const Cart: React.FC = () => {
 
 	const dispatch = useAppDispatch()
-	const { totalPrice, products, totalProductsCount } = useAppSelector((state: RootState) => state.cart)
+	const { totalPrice, products, totalProductsCount } = useAppSelector(cartSelector)
 
 	const onClearClick = () => {
 		if (window.confirm('Точно очистить корзину?')) {

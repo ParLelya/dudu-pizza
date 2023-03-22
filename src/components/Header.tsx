@@ -3,11 +3,11 @@ import { Link } from "react-router-dom";
 import Search from './Search';
 import { ISearchProps } from '../types/data';
 import { useAppSelector } from '../store/hooks';
-import { RootState } from '../store/store';
+import { cartSelector } from '../slices/cartSlice';
 
 const Header: React.FC<ISearchProps> = ({ searchValue, setSearchValue }) => {
 
-	const { totalPrice, totalProductsCount } = useAppSelector((state: RootState) => state.cart)
+	const { totalPrice, totalProductsCount } = useAppSelector(cartSelector)
 
 	return (
 		<div className="header">
