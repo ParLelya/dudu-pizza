@@ -24,7 +24,7 @@ const Product: React.FC = () => {
 				<div className='product-full'>
 					<img
 						src={product.imageUrl}
-						alt=''
+						alt='pizza'
 						className='product-full__image'
 					/>
 
