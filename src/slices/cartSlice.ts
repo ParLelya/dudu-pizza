@@ -60,8 +60,13 @@ export const CartSlice = createSlice({
 		if (findProduct) {
 			findProduct.count--
 		}
+
 		state.totalProductsCount = state.products.reduce((sum, item) => {
 			return sum + item.count
+		}, 0)
+
+		state.totalPrice = state.products.reduce((sum, obj) => {
+			return obj.price * obj.count + sum
 		}, 0)
 	},
   },

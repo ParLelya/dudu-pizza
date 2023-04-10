@@ -11,7 +11,7 @@ export type Pizza = {
 }
 
 export interface IProduct {
-	id: number | string
+	id: number
 	title: string
 	imageUrl: string
 	composition: string

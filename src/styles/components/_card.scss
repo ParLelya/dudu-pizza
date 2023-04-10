@@ -6,8 +6,13 @@
   margin: 0 1rem 2rem;
 
   @media screen and (max-width: 768px) {
-    width: 38vw;
+    width: 45%;
     margin: 0 0.5rem 1rem;
+  }
+
+  @media screen and (max-width: 600px) {
+    width: 80%;
+    margin: 0 auto 1rem;
   }
 
   //   &:not(:nth-of-type(4n)) {
