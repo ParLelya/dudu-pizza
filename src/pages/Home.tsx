@@ -11,8 +11,6 @@ import Card from '../components/Card';
 import Pagination from '../components/Pagination';
 import { Pizza } from '../types/data';
 import CardSkeleton from '../components/CardSkeleton';
-
-
 // import { sortArray } from './../components/Sorting';
 
 const Home: React.FC = () => {
@@ -20,7 +18,7 @@ const Home: React.FC = () => {
 	const dispatch = useAppDispatch()
 	const navigate = useNavigate()
 	// const isSearching = useRef(false)
-
+	// const isMounted = useRef(false)
 	const { category, sortType, currentPage, searchValue } = useAppSelector((state: RootState) => state.filter)
 	const { pizzas, isLoading } = useAppSelector((state: RootState) => state.products)
 
@@ -30,39 +28,46 @@ const Home: React.FC = () => {
 
 	const onPageChange = (page: number) => dispatch(setPage(page))
 
-	// useEffect(() => {
-	// 	if (window.location.search) {
-	// 		const params = qs.parse(window.location.search.substring(1))
-
-	// 		const sortType = sortArray.find(obj => obj.sort === params.sortType)
-	// 		dispatch(
-	// 			setFilters({...params, sortType})
-	// 		)
-	// 		isSearching.current = true
-	// 	}
-	// }, [])
-
 	const getPizzas = async () => {
 		const currentCategory = category > 0 ? `&category=${category}` : ''
 		const sortBy = sortType.sort.replace('-', '')
 		const order = sortType.sort.includes('-') ? 'asc' : 'desc'
 		const search = searchValue ? `&search=${searchValue}` : ''
 		const page = currentPage
-
 		dispatch(fetchPizzas({ currentCategory, sortBy, order, page, search }))
-		// if (!isSearching.current) {}
-
 		window.scrollTo(0, 290)
 	}
 
+	// useEffect(() => {
+	// 	if (window.location.search) {
+	// 		const params = qs.parse(window.location.search.substring(1))
+	// 		const sortType = sortArray.find(obj => obj.sort === params.sortType) as ISortType
+	// 		dispatch(
+	// 			setFilters({ ...params, sortType })
+	// 		)
+	// 		isSearching.current = true
+	// 	}
+	// 	// eslint-disable-next-line react-hooks/exhaustive-deps
+	// }, [])
+
 	useEffect(() => {
-		getPizzas()
-		const queryString = qs.stringify({
-			sort: sortType.sort,
-			category: category,
-			page: currentPage
-		})
-		navigate(`?${queryString}`)
+		window.scroll(0, 0)
+		// if (!isSearching.current) {
+			getPizzas()
+		// }
+		// isSearching.current = false
+	}, [category, sortType.sort, currentPage, searchValue])
+
+	useEffect(() => {
+		// if (isMounted.current) {
+			const queryString = qs.stringify({
+				sort: sortType.sort,
+				category: category,
+				page: currentPage
+			})
+			navigate(`?${queryString}`)
+		// }
+		// isMounted.current = true
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [category, sortType.sort, currentPage])
 
