@@ -1,14 +1,14 @@
-import React from 'react'
+import React, { memo } from 'react'
 
 interface ICategory {
 	categoryType: number
 	setCategoryType: (id: number) => void
 }
 
-const Categories: React.FC<ICategory> = ({ categoryType, setCategoryType }) => {
+const categories: Array<string> = ['Все', 'Мясные', 'Вегетарианские', 'Острые']
 
-	const categories: Array<string> = ['Все', 'Мясные', 'Вегетарианские', 'Острые']
-
+const Categories: React.FC<ICategory> = memo(({ categoryType, setCategoryType }) => {
+		
 	return (
 		<div className="categories">
 			<ul>
@@ -22,6 +22,6 @@ const Categories: React.FC<ICategory> = ({ categoryType, setCategoryType }) => {
 			</ul>
 		</div>
 	)
-}
+})
 
 export default Categories

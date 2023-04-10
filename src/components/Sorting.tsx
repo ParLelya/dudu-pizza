@@ -1,7 +1,6 @@
-import React, { useState, useRef } from 'react'
-import { useAppDispatch, useAppSelector } from '../store/hooks';
+import React, { useState, useRef, memo } from 'react'
+import { useAppDispatch } from '../store/hooks';
 import { setSort } from '../slices/filterSlice';
-import { RootState } from '../store/store';
 import { ISortType } from '../types/data'
 
 export const sortArray: Array<ISortType> = [
@@ -13,10 +12,9 @@ export const sortArray: Array<ISortType> = [
 	{ name: "по алфавиту Я-А", sort: 'title' }
 ]
 
-const Sorting: React.FC = () => {
-
+const Sorting: React.FC<ISortType> = memo((props) => {
 	const dispatch = useAppDispatch()
-	const sort = useAppSelector((state: RootState) => state.filter.sortType)
+	const {name, sort} = props
 	const sortRef = useRef<HTMLDivElement | null>(null)
 
 	const setSortType = (obj: ISortType) => {
@@ -76,7 +74,7 @@ const Sorting: React.FC = () => {
 						)
 				}
 				<b>Сортировка по:</b>
-				<span onClick={() => setOpen(!open)}>{sort.name}</span>
+				<span onClick={() => setOpen(!open)}>{name}</span>
 			</div>
 			{
 				open &&
@@ -88,7 +86,7 @@ const Sorting: React.FC = () => {
 									<li
 										key={index}
 										onClick={() => onSortListItemClick(obj)}
-										className={sort.sort === obj.sort ? 'active' : ''}
+										className={sort === obj.sort ? 'active' : ''}
 									>
 										{obj.name}
 									</li>
@@ -100,6 +98,6 @@ const Sorting: React.FC = () => {
 			}
 		</div>
 	)
-}
+})
 
 export default Sorting

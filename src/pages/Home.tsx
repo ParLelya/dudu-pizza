@@ -1,4 +1,4 @@
-import React, { useEffect, /*useRef*/ } from 'react'
+import React, { useCallback, useEffect, /*useRef*/ } from 'react'
 import { useNavigate } from 'react-router-dom';
 import qs from 'qs';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
@@ -22,9 +22,10 @@ const Home: React.FC = () => {
 	const { category, sortType, currentPage, searchValue } = useAppSelector((state: RootState) => state.filter)
 	const { pizzas, isLoading } = useAppSelector((state: RootState) => state.products)
 
-	const setCategoryType = (id: number) => {
+	const setCategoryType = useCallback((id: number) => {
 		dispatch(setCategory(id))
-	}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [])
 
 	const onPageChange = (page: number) => dispatch(setPage(page))
 
@@ -52,10 +53,7 @@ const Home: React.FC = () => {
 
 	useEffect(() => {
 		window.scroll(0, 0)
-		// if (!isSearching.current) {
 			getPizzas()
-		// }
-		// isSearching.current = false
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [category, sortType.sort, currentPage, searchValue])
 
@@ -80,7 +78,7 @@ const Home: React.FC = () => {
 		<>
 			<div className="content__top">
 				<Categories categoryType={category} setCategoryType={setCategoryType} />
-				<Sorting />
+				<Sorting name={sortType.name} sort={sortType.sort}/>
 			</div>
 			<h2 className="content__title">Все пиццы</h2>
 			<div className="content__items">
