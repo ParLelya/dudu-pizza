@@ -56,6 +56,7 @@ const Home: React.FC = () => {
 			getPizzas()
 		// }
 		// isSearching.current = false
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [category, sortType.sort, currentPage, searchValue])
 
 	useEffect(() => {
