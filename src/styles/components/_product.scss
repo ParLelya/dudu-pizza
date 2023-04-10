@@ -13,6 +13,10 @@
 		width: 25rem;
 		height: 100%;
 		margin: 1rem auto;
+
+		@media screen and (max-width: 800px) {
+			width: 80%;
+		}
 	}
 
 	&__description {
@@ -41,21 +45,21 @@
 			margin: 1rem auto;
 
 			@media screen and (max-width: 800px) {
-				width: 80%;
+				width: 100%;
 			}
 
 			ul li {
 				font-size: 1rem;
-
-				@media screen and (max-width: 800px) {
-					font-size: 1.5rem;
-				}
 			}
 		}
 
 		.pizza-block__price {
 			font-size: 1.5rem;
 			
+		}
+
+		.go-back-btn {
+			font-size: 1.2rem;
 		}
 	}
 }
