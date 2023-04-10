@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import Search from './Search';
 import { useAppSelector } from '../store/hooks';
 import { cartSelector } from '../slices/cartSlice';
@@ -7,6 +7,8 @@ import { cartSelector } from '../slices/cartSlice';
 const Header: React.FC = () => {
 
 	const { totalPrice, totalProductsCount } = useAppSelector(cartSelector)
+
+	const {pathname} = useLocation()
 
 	return (
 		<div className="header">
@@ -28,7 +30,8 @@ const Header: React.FC = () => {
 					</div>
 				</Link>
 				<Search />
-				<div className="header__cart">
+				{pathname !== '/cart' &&
+					<div className="header__cart">
 					<Link to='/cart' className="button button--cart">
 						<span>{totalPrice} ₽</span>
 						<div className="button__delimiter"></div>
@@ -64,6 +67,7 @@ const Header: React.FC = () => {
 						<span>{totalProductsCount}</span>
 					</Link>
 				</div>
+				}
 			</div>
 		</div >
 	)

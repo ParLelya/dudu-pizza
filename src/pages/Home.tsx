@@ -8,9 +8,9 @@ import { fetchPizzas } from '../slices/productSlice';
 import Categories from '../components/Categories';
 import Sorting from '../components/Sorting';
 import Card from '../components/Card';
-import MyLoader from '../components/MyLoader';
 import Pagination from '../components/Pagination';
 import { Pizza } from '../types/data';
+import CardSkeleton from '../components/CardSkeleton';
 
 
 // import { sortArray } from './../components/Sorting';
@@ -21,7 +21,7 @@ const Home: React.FC = () => {
 	const navigate = useNavigate()
 	// const isSearching = useRef(false)
 
-	const { category, sortType, currentPage, searchValue} = useAppSelector((state: RootState) => state.filter)
+	const { category, sortType, currentPage, searchValue } = useAppSelector((state: RootState) => state.filter)
 	const { pizzas, isLoading } = useAppSelector((state: RootState) => state.products)
 
 	const setCategoryType = (id: number) => {
@@ -48,8 +48,8 @@ const Home: React.FC = () => {
 		const order = sortType.sort.includes('-') ? 'asc' : 'desc'
 		const search = searchValue ? `&search=${searchValue}` : ''
 		const page = currentPage
-		
-		dispatch(fetchPizzas({currentCategory, sortBy, order, page, search}))
+
+		dispatch(fetchPizzas({ currentCategory, sortBy, order, page, search }))
 		// if (!isSearching.current) {}
 
 		window.scrollTo(0, 290)
@@ -68,7 +68,7 @@ const Home: React.FC = () => {
 
 	const products: JSX.Element[] = pizzas.map((obj: Pizza) => <Card {...obj} key={obj.id} />)
 
-	const skeleton = [...new Array(4)].map((_, index) => <MyLoader key={index} />)
+	const skeleton = [...new Array(4)].map((_, index) => <CardSkeleton key={index} />)
 
 	return (
 		<>

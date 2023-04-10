@@ -13,12 +13,12 @@ const ProductInCart: React.FC<IProduct> = (props) => {
 	}
 
 	const onMinusClick = () => {
-		dispatch(minusCount(id))
+		dispatch(minusCount(id as number))
 	}
 
 	const removeClick = () => {
 		if (window.confirm('Подтвердите удаление товара'))
-		dispatch(removeProduct(id))
+		dispatch(removeProduct(id as number))
 	}
 
 	return (

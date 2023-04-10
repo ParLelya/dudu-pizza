@@ -1,7 +1,8 @@
 export type Pizza = {
-	id: number
+	id: number | string
 	imageUrl: string
 	title: string
+	composition: string
 	types: number[]
 	sizes: number[]
 	price: number
@@ -10,10 +11,11 @@ export type Pizza = {
 }
 
 export interface IProduct {
-	id: number
+	id: number | string
 	title: string
-	price: number
 	imageUrl: string
+	composition: string
+	price: number
 	type: string
 	size: number
 	count: number
