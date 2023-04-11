@@ -1,18 +1,30 @@
+# Quick start
+
+### Склонировать репозиторий
+### `npm install` установить зависимости
+### `npm start` запуск проекта
+### Вкладка в браузере [http://localhost:3000](http://localhost:3000)
+
+## РеализованныЙ функционал:
+
+1. Главная страница с витриной товаров, SPA 
+1.1. Подгрузка продуктов с mockapi
+1.2. Навигация с помощью react-router
+2. Пагинация с помощью react-paginate
+3. Корзина с вычислением общей стоимости и общего количества добавленных товаров
+3.1. Сохранение корзины в localStorage
+4. Сортировка, категории и поиск (работает по названию и составу товаров)
+4.1. Оптимизация рендера с помощью memo и useCallback
+5. Выбор из нескольких параметров продукта
+6. Отдельные страницы товаров с составом и возможностью выбрать параметры и добавить продукт в корзину
+
 # Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) TS template.
 
 ## Available Scripts
 
 In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
 
 ### `npm test`
 
