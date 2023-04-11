@@ -5,6 +5,8 @@
 ### `npm start` запуск проекта
 ### Вкладка в браузере [http://localhost:3000](http://localhost:3000)
 
+[Деплой сайта на netlify](https://sunny-toffee-ac5dc6.netlify.app/)
+
 ## РеализованныЙ функционал:
 
 1. Главная страница с витриной товаров, SPA<br/>
