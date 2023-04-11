@@ -1,6 +1,6 @@
 import React, { useRef, useCallback } from 'react'
 import debounce from 'lodash.debounce'
-import { useAppDispatch } from '../store/hooks'
+import { useAppDispatch } from '../hooks/hooks'
 import { setSearchValue } from '../slices/filterSlice'
 
 const Search: React.FC = () => {

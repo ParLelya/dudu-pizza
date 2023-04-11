@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
-import { Pizza } from '../types/data'
+import type { Pizza } from '../types/data'
 import axios from 'axios'
 
 export interface ProductsState {
@@ -105,7 +105,6 @@ export const productsSlice = createSlice({
 		})
   },
 })
-
 
 export const { setProducts, setProduct } = productsSlice.actions
 

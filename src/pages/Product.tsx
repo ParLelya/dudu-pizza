@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router';
-import { useAppDispatch, useAppSelector } from '../store/hooks';
+import { useAppDispatch, useAppSelector } from '../hooks/hooks';
 import { fetchPizza } from '../slices/productSlice';
 import { RootState } from '../store/store';
 import MyLoader from '../components/MyLoader';

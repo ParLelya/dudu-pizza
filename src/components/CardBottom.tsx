@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { cartItemSelector, addProduct } from '../slices/cartSlice'
-import { useAppDispatch, useAppSelector } from '../store/hooks'
+import { useAppDispatch, useAppSelector } from '../hooks/hooks'
 import { Pizza } from '../types/data'
 
 const CardBottom: React.FC<Pizza> = (props) => {
@@ -25,7 +25,7 @@ const CardBottom: React.FC<Pizza> = (props) => {
 		}
 		dispatch(addProduct(item))
 	}
-	
+
 	return (
 		<>
 			<div className="pizza-block__selector">

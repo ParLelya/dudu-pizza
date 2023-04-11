@@ -5,7 +5,7 @@ import NotFound from './pages/NotFound';
 import Cart from './pages/Cart';
 import Product from './pages/Product';
 import './styles/app.scss';
-import MainLayout from './components/layouts/MainLayout';
+import MainLayout from './layouts/MainLayout';
 
 const App: React.FC = () => {
 

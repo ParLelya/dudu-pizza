@@ -1,5 +1,5 @@
 import React, { useState, useRef, memo } from 'react'
-import { useAppDispatch } from '../store/hooks';
+import { useAppDispatch } from '../hooks/hooks';
 import { setSort } from '../slices/filterSlice';
 import { ISortType } from '../types/data'
 
@@ -14,7 +14,7 @@ export const sortArray: Array<ISortType> = [
 
 const Sorting: React.FC<ISortType> = memo((props) => {
 	const dispatch = useAppDispatch()
-	const {name, sort} = props
+	const { name, sort } = props
 	const sortRef = useRef<HTMLDivElement | null>(null)
 
 	const setSortType = (obj: ISortType) => {

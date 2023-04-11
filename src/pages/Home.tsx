@@ -1,7 +1,7 @@
-import React, { useCallback, useEffect, /*useRef*/ } from 'react'
+import React, { useCallback, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom';
 import qs from 'qs';
-import { useAppDispatch, useAppSelector } from '../store/hooks';
+import { useAppDispatch, useAppSelector } from '../hooks/hooks';
 import type { RootState } from '../store/store';
 import { setCategory, setPage, /*setFilters*/ } from '../slices/filterSlice';
 import { fetchPizzas } from '../slices/productSlice';
@@ -18,13 +18,13 @@ const Home: React.FC = () => {
 	const dispatch = useAppDispatch()
 	const navigate = useNavigate()
 	// const isSearching = useRef(false)
-	// const isMounted = useRef(false)
+	const isMounted = useRef(false)
 	const { category, sortType, currentPage, searchValue } = useAppSelector((state: RootState) => state.filter)
 	const { pizzas, isLoading } = useAppSelector((state: RootState) => state.products)
 
 	const setCategoryType = useCallback((id: number) => {
 		dispatch(setCategory(id))
-	// eslint-disable-next-line react-hooks/exhaustive-deps
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 
 	const onPageChange = (page: number) => dispatch(setPage(page))
@@ -53,20 +53,20 @@ const Home: React.FC = () => {
 
 	useEffect(() => {
 		window.scroll(0, 0)
-			getPizzas()
-	// eslint-disable-next-line react-hooks/exhaustive-deps
+		getPizzas()
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [category, sortType.sort, currentPage, searchValue])
 
 	useEffect(() => {
-		// if (isMounted.current) {
+		if (isMounted.current) {
 			const queryString = qs.stringify({
 				sort: sortType.sort,
 				category: category,
 				page: currentPage
 			})
 			navigate(`?${queryString}`)
-		// }
-		// isMounted.current = true
+		}
+		isMounted.current = true
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [category, sortType.sort, currentPage])
 
@@ -78,7 +78,7 @@ const Home: React.FC = () => {
 		<>
 			<div className="content__top">
 				<Categories categoryType={category} setCategoryType={setCategoryType} />
-				<Sorting name={sortType.name} sort={sortType.sort}/>
+				<Sorting name={sortType.name} sort={sortType.sort} />
 			</div>
 			<h2 className="content__title">Все пиццы</h2>
 			<div className="content__items">

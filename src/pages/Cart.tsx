@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from '../store/hooks';
+import { useAppDispatch, useAppSelector } from '../hooks/hooks';
 import { IProduct } from '../types/data';
 import ProductInCart from '../components/ProductInCart';
 import { cartSelector, clearProducts } from '../slices/cartSlice';

@@ -1,14 +1,22 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Link, useLocation } from "react-router-dom";
 import Search from './Search';
-import { useAppSelector } from '../store/hooks';
+import { useAppSelector } from '../hooks/hooks';
 import { cartSelector } from '../slices/cartSlice';
 
 const Header: React.FC = () => {
 
-	const { totalPrice, totalProductsCount } = useAppSelector(cartSelector)
-
+	const { totalPrice, totalProductsCount, products } = useAppSelector(cartSelector)
 	const { pathname } = useLocation()
+	const isMounted = useRef(false)
+
+	useEffect(() => {
+		if (isMounted) {
+			const json = JSON.stringify(products)
+			localStorage.setItem('cart', json)
+		}
+		isMounted.current = true
+	}, [products])
 
 	return (
 		<div className="header">

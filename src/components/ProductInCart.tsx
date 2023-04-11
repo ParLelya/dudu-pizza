@@ -1,16 +1,16 @@
 import React from 'react'
 import { IProduct } from '../types/data'
-import { useAppDispatch } from '../store/hooks'
+import { useAppDispatch } from '../hooks/hooks'
 import { addProduct, minusCount, removeProduct } from '../slices/cartSlice'
 import clsx from 'clsx'
 
 const ProductInCart: React.FC<IProduct> = (props) => {
-	
+
 	const dispatch = useAppDispatch()
 	const { id, title, type, size, imageUrl, price, count } = props
 
 	const onAddClick = () => {
-		dispatch(addProduct({id}))
+		dispatch(addProduct({ id }))
 	}
 
 	const onMinusClick = () => {
@@ -19,7 +19,7 @@ const ProductInCart: React.FC<IProduct> = (props) => {
 
 	const removeClick = () => {
 		if (window.confirm('Подтвердите удаление товара'))
-		dispatch(removeProduct(id))
+			dispatch(removeProduct(id))
 	}
 
 	return (
@@ -40,8 +40,8 @@ const ProductInCart: React.FC<IProduct> = (props) => {
 					onClick={onMinusClick}
 					disabled={count === 1}
 					className={clsx('button button--outline button--circle cart__item-count-minus',
-					 {'cart__item-count-minus--disabled': count === 1 }
-					 )}
+						{ 'cart__item-count-minus--disabled': count === 1 }
+					)}
 				>
 					<b>-</b>
 				</button>
@@ -57,9 +57,9 @@ const ProductInCart: React.FC<IProduct> = (props) => {
 				<b>{price * count} ₽</b>
 			</div>
 			<div className="cart__item-remove">
-				<div 
-				onClick={removeClick}
-				className="button button--outline button--circle"
+				<div
+					onClick={removeClick}
+					className="button button--outline button--circle"
 				>
 					<svg
 						width="10"

@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 import { IProduct } from '../types/data'
 import { RootState } from '../store/store'
+import { getCartFromLS, getTotalCount, getTotalPrice } from '../utils/getCartData'
 
 export interface CartState {
   totalPrice: number
@@ -9,10 +10,12 @@ export interface CartState {
   totalProductsCount: number
 }
 
+const data = getCartFromLS()
+
 const initialState: CartState = {
-	totalPrice: 0,
-	products: [],
-	totalProductsCount: 0
+	totalPrice: data.totalPrice,
+	products: data.products,
+	totalProductsCount: data.totalProductsCount
 }
 
 export const CartSlice = createSlice({
@@ -30,24 +33,14 @@ export const CartSlice = createSlice({
 			})
 		}
 
-		state.totalPrice = state.products.reduce((sum, obj) => {
-			return obj.price * obj.count + sum
-		}, 0)
-
-		state.totalProductsCount = state.products.reduce((sum, item) => {
-			return sum + item.count
-		}, 0)
+		state.totalProductsCount = getTotalPrice(state.products)
+		state.totalProductsCount = getTotalCount(state.products)
     },
 	removeProduct(state, action: PayloadAction<number>) {
 		state.products = state.products.filter(obj => obj.id !== action.payload)
 		
-		state.totalPrice = state.products.reduce((sum, obj) => {
-			return obj.price * obj.count + sum
-		}, 0)
-
-		state.totalProductsCount = state.products.reduce((sum, item) => {
-			return sum + item.count
-		}, 0)
+		state.totalProductsCount = getTotalPrice(state.products)
+		state.totalProductsCount = getTotalCount(state.products)
     },
 	clearProducts(state) {
 		state.products = []
@@ -61,13 +54,8 @@ export const CartSlice = createSlice({
 			findProduct.count--
 		}
 
-		state.totalProductsCount = state.products.reduce((sum, item) => {
-			return sum + item.count
-		}, 0)
-
-		state.totalPrice = state.products.reduce((sum, obj) => {
-			return obj.price * obj.count + sum
-		}, 0)
+		state.totalProductsCount = getTotalPrice(state.products)
+		state.totalProductsCount = getTotalCount(state.products)
 	},
   },
 })
