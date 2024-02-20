@@ -22,7 +22,7 @@ export const CartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
-    addProduct(state, action: PayloadAction<any>) {
+    addProduct(state, action: PayloadAction<IProduct>) {
 		const findProduct = state.products.find(obj => obj.id === action.payload.id)
 
 		if (findProduct) {
@@ -33,13 +33,13 @@ export const CartSlice = createSlice({
 			})
 		}
 
-		state.totalProductsCount = getTotalPrice(state.products)
+		state.totalPrice = getTotalPrice(state.products)
 		state.totalProductsCount = getTotalCount(state.products)
     },
 	removeProduct(state, action: PayloadAction<number>) {
 		state.products = state.products.filter(obj => obj.id !== action.payload)
 		
-		state.totalProductsCount = getTotalPrice(state.products)
+		state.totalPrice = getTotalPrice(state.products)
 		state.totalProductsCount = getTotalCount(state.products)
     },
 	clearProducts(state) {
@@ -54,7 +54,7 @@ export const CartSlice = createSlice({
 			findProduct.count--
 		}
 
-		state.totalProductsCount = getTotalPrice(state.products)
+		state.totalPrice = getTotalPrice(state.products)
 		state.totalProductsCount = getTotalCount(state.products)
 	},
   },
